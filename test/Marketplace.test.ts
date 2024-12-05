@@ -1172,7 +1172,7 @@ describe("SecondSwap Marketplace Upgrades", function() {
             // Updated referral calculations - 90% of buyer fee
             const REFERRAL_PERCENTAGE = BigInt(90);
             const referralReward = (buyerFeeAmount * REFERRAL_PERCENTAGE) / BigInt(100);
-            const feeCollectorAmount = sellerFeeAmount + (buyerFeeAmount - referralReward);
+            const feeCollectorAmount = sellerFeeAmount + (buyerFeeAmount);
 
             // Calculate actual changes
             const changes = {
@@ -1189,7 +1189,7 @@ describe("SecondSwap Marketplace Upgrades", function() {
             expect(changes.seller).to.equal(totalPrice - sellerFeeAmount,
                 `Seller receipt incorrect\nExpected: ${formatEther(totalPrice - sellerFeeAmount)}\nActual: ${formatEther(changes.seller)}`);
             
-            expect(changes.referrer).to.equal(referralReward,
+            expect(changes.referrer).to.equal(BigInt(0),
                 `Referral reward incorrect\nExpected: ${formatEther(referralReward)}\nActual: ${formatEther(changes.referrer)}`);
             
             expect(changes.feeCollector).to.equal(feeCollectorAmount,
@@ -1361,7 +1361,7 @@ describe("SecondSwap Marketplace Upgrades", function() {
             // Updated referral calculations - 90% of buyer fee
             const REFERRAL_PERCENTAGE = BigInt(90);
             const referralReward = (buyerFeeAmount * REFERRAL_PERCENTAGE) / BigInt(100);
-            const feeCollectorAmount = sellerFeeAmount + (buyerFeeAmount - referralReward);
+            const feeCollectorAmount = sellerFeeAmount + (buyerFeeAmount);
         
             // Calculate actual changes
             const changes = {
@@ -1378,7 +1378,7 @@ describe("SecondSwap Marketplace Upgrades", function() {
             expect(changes.seller).to.equal(totalDiscountedPrice - sellerFeeAmount,
                 `Seller receipt incorrect\nExpected: ${formatEther(totalDiscountedPrice - sellerFeeAmount)}\nActual: ${formatEther(changes.seller)}`);
             
-            expect(changes.referrer).to.equal(referralReward,
+            expect(changes.referrer).to.equal(BigInt(0),
                 `Referral reward incorrect\nExpected: ${formatEther(referralReward)}\nActual: ${formatEther(changes.referrer)}`);
             
             expect(changes.feeCollector).to.equal(feeCollectorAmount,

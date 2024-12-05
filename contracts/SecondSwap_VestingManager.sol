@@ -100,6 +100,11 @@ contract SecondSwap_VestingManager is IVestingManager, Initializable {
         _;
     }
 
+    /**
+     * @notice Initializes the vesting manager contract
+     * @dev Implementation of initializer for upgradeable pattern
+     * @param _s2admin Address of the admin
+     */
     function initialize(
         address _s2admin
     ) public initializer {

@@ -427,12 +427,11 @@ contract SecondSwap_Marketplace is Initializable {
         referralFeeCost = 0;
         if (_referral != address(0) && listing.whitelist == address(0)) {
             referralFeeCost = buyerFeeTotal -(baseAmount * bfee * IMarketplaceSetting(marketplaceSetting).referralFee()) / (BASE * BASE);
-            IERC20(listing.currency).safeTransfer(_referral, referralFeeCost); //  3.6. DOS caused by the use of transfer and transferFrom functions
         }
 
         IERC20(listing.currency).safeTransfer(listing.seller, (baseAmount - sellerFeeTotal)); //  3.6. DOS caused by the use of transfer and transferFrom functions
         
-        uint256 feeCollectorTotal = (buyerFeeTotal - referralFeeCost + sellerFeeTotal);
+        uint256 feeCollectorTotal = (buyerFeeTotal + sellerFeeTotal);
         IERC20(listing.currency).safeTransfer(IMarketplaceSetting(marketplaceSetting).feeCollector(), feeCollectorTotal); //  3.6. DOS caused by the use of transfer and transferFrom functions
     }
 
